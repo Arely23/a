@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,7 +25,8 @@ import { LoginScreenComponent } from './screens/login-screen/login-screen.compon
     BrowserAnimationsModule,
     NgxMaskModule.forRoot(options),
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
