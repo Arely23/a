@@ -12,12 +12,14 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 //Angular material
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-import { LoginScreenComponent } from './screens/login-screen/login-screen.component'
+import { LoginScreenComponent } from './screens/login-screen/login-screen.component';
+import { RegistroUserScreenComponent } from './screens/registro-user-screen/registro-user-screen.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginScreenComponent
+    LoginScreenComponent,
+    RegistroUserScreenComponent
   ],
   imports: [
     BrowserModule,

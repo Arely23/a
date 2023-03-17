@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 declare var $:any;
 
 @Component({
@@ -9,7 +10,9 @@ declare var $:any;
 export class LoginScreenComponent implements OnInit {
   public type: string = 'password';
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
   }
@@ -24,6 +27,11 @@ export class LoginScreenComponent implements OnInit {
       $("#show-password").attr("data-password", false);
       this.type = "password";
     }
+  }
+
+  //Para ir al registro
+  public goRegistro(){
+    this.router.navigate(["registro"]);
   }
 
 }

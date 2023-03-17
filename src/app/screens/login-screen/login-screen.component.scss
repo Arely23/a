@@ -81,6 +81,17 @@ input{
     opacity: 1;
 }
 
+.input-group-text{
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 2px solid #3E3E3E;
+    opacity: 1;
+    border-left: none!important;
+}
+
+.pwd{
+    border-right: none!important;
+}
+
 .form-check-label{
     text-align: left;
     font-family: Nexa-Bold;
@@ -112,4 +123,8 @@ input{
     background-color: #017895!important;
     border-color: #017895!important;
     
+}
+
+.bi{
+    cursor: pointer;
 }

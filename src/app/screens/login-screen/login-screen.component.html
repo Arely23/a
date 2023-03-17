@@ -14,7 +14,7 @@
                         </div>
                         <div class="pt-3 mb-3">
                             <div class="input-group input-group-merge">
-                                <input type="{{type}}" id="password" name="password_user" class="form-control" placeholder="Contraseña">
+                                <input type="{{type}}" id="password" name="password_user" class="form-control pwd" placeholder="Contraseña">
                                 <div class="input-group-text" id="show-password" data-password="false">
                                     <i *ngIf="type == 'password'" class="bi bi-eye-fill" (click)="showPassword()"></i>
                                     <i *ngIf="type == 'text'" class="bi bi-eye-slash-fill" (click)="showPassword()"></i>
@@ -26,8 +26,9 @@
                             <label class="form-check-label" for="checkbox-signin">Olvidé mi contraseña</label>
                         </div>
 
-                        <div class="mb-3 mb-0" style="text-align: center;">
+                        <div class="d-flex flex-column align-items-center mb-3 mb-0 w-100" style="text-align: center;">
                             <button class="btn btn-primary" type="submit">Iniciar sesión</button>
+                            <label class="form-check-label pt-3" for="checkbox-signin" (click)="goRegistro()">Registrarse</label>
                         </div>
                     </div>
                 </div>
