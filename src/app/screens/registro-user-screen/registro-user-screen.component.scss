@@ -62,10 +62,14 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    gap: 2rem;
     padding-top: 1.5rem;
+    gap: 2rem;
 }
 
+.invalid-feedback {
+    margin-top: -10px;
+    margin-bottom: -1rem;
+}
 mat-form-field{
     width: 100%!important;
     height: 48px!important;

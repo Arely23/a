@@ -88,5 +88,7 @@ export class UsuariosService {
     if(!this.validatorService.required(data["ocupacion"])){
       error["ocupacion"] = this.errorService.required;
     }
+
+    return error;
   }
 }
