@@ -17,6 +17,8 @@ export class RegistroUserScreenComponent implements OnInit {
   public hide_2: boolean = false;
   public inputType_1: string = 'password';
   public inputType_2: string = 'password';
+  //Fecha
+  public fechaSelect: string = "";
 
   constructor(
     private location: Location,
@@ -65,5 +67,13 @@ export class RegistroUserScreenComponent implements OnInit {
       this.inputType_2 = 'password';
       this.hide_2 = false;
     }
+  }
+
+  //Para la fecha
+  public changeFecha(event :any){
+    console.log(event);
+    this.user.fecha_nacimiento = event.value.toISOString().split("T")[0];
+    console.log("Fecha: ", this.user.fecha_nacimiento);
+    
   }
 }
