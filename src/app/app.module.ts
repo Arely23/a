@@ -14,6 +14,11 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
+//Esto es para fechas
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+//Cambia el idioma a español
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 //Componentes
 import { LoginScreenComponent } from './screens/login-screen/login-screen.component';
 import { RegistroUserScreenComponent } from './screens/registro-user-screen/registro-user-screen.component'
@@ -34,9 +39,13 @@ import { RegistroUserScreenComponent } from './screens/registro-user-screen/regi
     FontAwesomeModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'es-ES'},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
