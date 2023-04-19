@@ -42,6 +42,16 @@ export class RegistroUserScreenComponent implements OnInit {
      if(!$.isEmptyObject(this.errors)){
        return false;
      }
+
+     //Mandar a registrar los datos
+     this.usuariosService.registrarUsuario(this.user).subscribe(
+      (response)=>{
+        alert("Usuario registrado correctamente");
+        console.log("Usuario registrado: ", response);
+      }, (error)=>{
+        alert("No se pudo registrar usuario");
+      }
+     );
   }
 
   //Funciones para password

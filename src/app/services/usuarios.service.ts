@@ -3,6 +3,13 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ErrorsService } from './tools/errors.service';
 import { ValidatorService } from './tools/validator.service';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +17,7 @@ import { ValidatorService } from './tools/validator.service';
 export class UsuariosService {
 
   constructor(
-    //private http: HttpClient,
+    private http: HttpClient,
     public router: Router,
     private validatorService: ValidatorService,
     private errorService: ErrorsService,
@@ -102,5 +109,11 @@ export class UsuariosService {
     }
 
     return error;
+  }
+
+  //Aquí van los servicios HTTP
+  //Post para registrar
+  public registrarUsuario (data: any): Observable <any>{
+    return this.http.post<any>(`${environment.url_api}/users/`,data, httpOptions);
   }
 }
