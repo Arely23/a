@@ -23,13 +23,15 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 //Componentes
 import { LoginScreenComponent } from './screens/login-screen/login-screen.component';
-import { RegistroUserScreenComponent } from './screens/registro-user-screen/registro-user-screen.component'
+import { RegistroUserScreenComponent } from './screens/registro-user-screen/registro-user-screen.component';
+import { HomePageScreenComponent } from './screens/home-page-screen/home-page-screen.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginScreenComponent,
-    RegistroUserScreenComponent
+    RegistroUserScreenComponent,
+    HomePageScreenComponent
   ],
   imports: [
     BrowserModule,
