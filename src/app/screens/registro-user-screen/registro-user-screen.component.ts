@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { UsuariosService } from '../../services/usuarios.service';
+import { Router } from '@angular/router';
 declare var $:any;
 
 @Component({
@@ -22,7 +23,8 @@ export class RegistroUserScreenComponent implements OnInit {
 
   constructor(
     private location: Location,
-    private usuariosService: UsuariosService
+    private usuariosService: UsuariosService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +50,8 @@ export class RegistroUserScreenComponent implements OnInit {
       (response)=>{
         alert("Usuario registrado correctamente");
         console.log("Usuario registrado: ", response);
+        //Si se registró, entonces mandar al login
+        this.router.navigate(["/"]);
       }, (error)=>{
         alert("No se pudo registrar usuario");
       }

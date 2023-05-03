@@ -6,6 +6,7 @@ import { ValidatorService } from './tools/validator.service';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { FacadeService } from './facade.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,6 +22,7 @@ export class UsuariosService {
     public router: Router,
     private validatorService: ValidatorService,
     private errorService: ErrorsService,
+    private facadeService: FacadeService,
   ) { }
 
   getDefaultSchedule() {
@@ -115,5 +117,11 @@ export class UsuariosService {
   //Post para registrar
   public registrarUsuario (data: any): Observable <any>{
     return this.http.post<any>(`${environment.url_api}/users/`,data, httpOptions);
+  }
+
+  public obtenerListaUsers (): Observable <any>{
+    var token = this.facadeService.getSessionToken();
+    var headers = new HttpHeaders({ 'Content-Type': 'application/json' , 'Authorization': 'Bearer '+token});
+    return this.http.get<any>(`${environment.url_api}/lista-users/`, {headers:headers});
   }
 }

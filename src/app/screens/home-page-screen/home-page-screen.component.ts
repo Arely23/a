@@ -4,6 +4,7 @@ import { FacadeService } from 'src/app/services/facade.service';
 import { Location } from '@angular/common';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-home-page-screen',
@@ -11,8 +12,11 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./home-page-screen.component.scss']
 })
 export class HomePageScreenComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<DatosUsuario>(ELEMENT_DATA);
+  public token: string = "";
+  public lista_usuarios: any[] = [];
+
+  displayedColumns: string[] = ['matricula', 'nombre', 'email', 'fecha_nacimiento', 'edad', 'curp', 'rfc', 'telefono', 'ocupacion'];
+  dataSource = new MatTableDataSource<DatosUsuario>(this.lista_usuarios as DatosUsuario[]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -20,12 +24,12 @@ export class HomePageScreenComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
   
-  public token: string = "";
-
+  
   constructor(
     private router: Router,
     private facadeService: FacadeService,
-    private location: Location
+    private location: Location,
+    private usuariosService: UsuariosService,
   ) { }
 
   ngOnInit(): void {
@@ -35,8 +39,32 @@ export class HomePageScreenComponent implements OnInit {
     if(this.token == ""){
       this.router.navigate([""]);
     }
-
+    //Obtener usuarios
+    this.obtenerUsuarios();
+    //Para paginador
     this.initPaginator();
+  }
+
+  //Obtener lista de usuarios
+  public obtenerUsuarios(){
+    this.usuariosService.obtenerListaUsers().subscribe(
+      (response)=>{
+        this.lista_usuarios = response;
+        console.log("Lista users: ", this.lista_usuarios);
+        if(this.lista_usuarios.length > 0){
+          //Agregar datos del nombre e email
+          this.lista_usuarios.forEach(usuario => {
+            usuario.first_name = usuario.user.first_name;
+            usuario.last_name = usuario.user.last_name;
+            usuario.email = usuario.user.email;
+          });
+          this.dataSource = new MatTableDataSource<DatosUsuario>(this.lista_usuarios as DatosUsuario[]);
+          //this.initPaginator();
+        }
+      }, (error)=>{
+        alert("No se pudo obtener la lista de usuarios");
+      }
+    );
   }
 
   //Cerrar sesión
@@ -84,31 +112,14 @@ export class HomePageScreenComponent implements OnInit {
 }
 
 export interface DatosUsuario {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+  id: number,
+  first_name: string;
+  last_name: string;
+  email: string;
+  fecha_nacimiento: string,
+  curp: string,
+  rfc: string,
+  edad: number,
+  telefono: string,
+  ocupacion: string
 }
-
-const ELEMENT_DATA: DatosUsuario[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-  {position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na'},
-  {position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg'},
-  {position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al'},
-  {position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si'},
-  {position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P'},
-  {position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S'},
-  {position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl'},
-  {position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar'},
-  {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
-  {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
-];
