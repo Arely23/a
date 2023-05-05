@@ -39,7 +39,7 @@ export class HomePageScreenComponent implements OnInit {
     if(this.token == ""){
       this.router.navigate([""]);
     }
-    //Obtener usuarios
+    //Obtener usuarios -- manda a llamar la función
     this.obtenerUsuarios();
     //Para paginador
     this.initPaginator();
@@ -59,7 +59,6 @@ export class HomePageScreenComponent implements OnInit {
             usuario.email = usuario.user.email;
           });
           this.dataSource = new MatTableDataSource<DatosUsuario>(this.lista_usuarios as DatosUsuario[]);
-          //this.initPaginator();
         }
       }, (error)=>{
         alert("No se pudo obtener la lista de usuarios");

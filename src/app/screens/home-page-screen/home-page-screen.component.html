@@ -9,19 +9,19 @@
             <div class="body-home">
                 <div class="mat-elevation-z8">
                     <table mat-table [dataSource]="dataSource">
-                        <!-- Position Column -->
+                        <!-- 1era fila -->
                         <ng-container matColumnDef="matricula">
                             <th mat-header-cell *matHeaderCellDef> Matrícula </th>
                             <td mat-cell *matCellDef="let element"> {{element.id}} </td>
                         </ng-container>
                     
-                        <!-- Name Column -->
+                        <!-- 2da fila -->
                         <ng-container matColumnDef="nombre">
                             <th mat-header-cell *matHeaderCellDef> Nombre </th>
                             <td mat-cell *matCellDef="let element"> {{element.first_name}} {{element.last_name}} </td>
                         </ng-container>
                     
-                        <!-- Weight Column -->
+                        <!-- 3era fila -->
                         <ng-container matColumnDef="email">
                             <th mat-header-cell *matHeaderCellDef> Correo electrónico </th>
                             <td mat-cell *matCellDef="let element"> {{element.email}} </td>
