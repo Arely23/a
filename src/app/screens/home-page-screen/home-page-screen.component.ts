@@ -15,7 +15,7 @@ export class HomePageScreenComponent implements OnInit {
   public token: string = "";
   public lista_usuarios: any[] = [];
 
-  displayedColumns: string[] = ['matricula', 'nombre', 'email', 'fecha_nacimiento', 'edad', 'curp', 'rfc', 'telefono', 'ocupacion'];
+  displayedColumns: string[] = ['matricula', 'nombre', 'email', 'fecha_nacimiento', 'edad', 'curp', 'rfc', 'telefono', 'ocupacion', 'editar', 'eliminar'];
   dataSource = new MatTableDataSource<DatosUsuario>(this.lista_usuarios as DatosUsuario[]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -107,11 +107,17 @@ export class HomePageScreenComponent implements OnInit {
     },500);
     //this.dataSourceIngresos.paginator = this.paginator;
   }
-  
-}
 
+  public goEditar(id: number){
+    this.router.navigate(["registro/"+id]);
+  }
+  
+}//Aquí cierra la clase principal
+
+//Esto va fuera de la llave que cierra la clase
 export interface DatosUsuario {
   id: number,
+  matricula: number;
   first_name: string;
   last_name: string;
   email: string;
@@ -121,4 +127,5 @@ export interface DatosUsuario {
   edad: number,
   telefono: string,
   ocupacion: string
+
 }

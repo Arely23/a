@@ -124,4 +124,8 @@ export class UsuariosService {
     var headers = new HttpHeaders({ 'Content-Type': 'application/json' , 'Authorization': 'Bearer '+token});
     return this.http.get<any>(`${environment.url_api}/lista-users/`, {headers:headers});
   }
+
+  public getUserByID(idUser: number){
+    return this.http.get<any>(`${environment.url_api}/users/?id=${idUser}`,httpOptions); 
+  }
 }

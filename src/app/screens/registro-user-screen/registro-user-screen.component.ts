@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { UsuariosService } from '../../services/usuarios.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 declare var $:any;
 
 @Component({
@@ -20,15 +20,29 @@ export class RegistroUserScreenComponent implements OnInit {
   public inputType_2: string = 'password';
   //Fecha
   public fechaSelect: string = "";
+  //Id del usuario
+  public idUser: number = 0;
+  public editar: boolean = false;
 
   constructor(
     private location: Location,
     private usuariosService: UsuariosService,
+    public activatedRoute: ActivatedRoute,
     private router: Router
   ) { }
 
   ngOnInit(): void {
     this.user = this.usuariosService.getDefaultSchedule();
+    //Esto es para editar
+    //El primer if valida si existe un parámetro en la URL
+    if(this.activatedRoute.snapshot.params['id'] != undefined){
+      this.editar = true;
+      //Asignamos a nuestra variable global el valor del ID que viene por la URL
+      this.idUser = this.activatedRoute.snapshot.params['id'];
+      console.log("ID User: ", this.idUser);
+      //Al iniciar la vista obtiene el usuario por su ID
+      this.obtenerUserByID();
+    }
     console.log("Usuario: ", this.user);
   }
 
@@ -58,6 +72,25 @@ export class RegistroUserScreenComponent implements OnInit {
      );
   }
 
+  //Función para obtener un solo usuario por su ID
+  public obtenerUserByID(){
+    this.usuariosService.getUserByID(this.idUser).subscribe(
+      (response)=>{
+        this.user = response;
+        //Agregamos valores faltantes
+        this.user.id = response.matricula;
+        this.user.first_name = response.user.first_name;
+        this.user.last_name = response.user.last_name;
+        this.user.email = response.user.email;
+        var fechaNac = new Date(response.fecha_nacimiento);
+        console.log("Fecha: ", fechaNac);
+        this.user.fecha_nacimiento = fechaNac;
+        console.log("Datos user: ", this.user);
+      }, (error)=>{
+        alert("No se pudieron obtener los datos del usuario para editar");
+      }
+    );
+  }
   //Funciones para password
   showPassword()
   {

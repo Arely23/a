@@ -27,18 +27,18 @@
     
                 <mat-form-field class="mat-input" appearance="outline">
                     <mat-label>Correo electrónico</mat-label>
-                    <input matInput [(ngModel)]="user.email" placeholder="Escribe correo electrónico">
+                    <input matInput [(ngModel)]="user.email" placeholder="Escribe correo electrónico" [disabled]="editar">
                 </mat-form-field>
                 <div *ngIf="errors.email" class="invalid-feedback">{{ errors.email }}</div>
 
-                <mat-form-field class="mat-input" appearance="outline">
+                <mat-form-field class="mat-input" appearance="outline" *ngIf="!editar">
                     <mat-label>Contraseña</mat-label>
                     <input matInput [(ngModel)]="user.password" type="{{ inputType_1 }}" placeholder="Escribe contraseña">
                     <mat-icon matSuffix class="eye-icon" (click)="showPassword()">{{hide_1 ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </mat-form-field>
                 <div *ngIf="errors.password" class="invalid-feedback">{{ errors.password }}</div>
     
-                <mat-form-field class="mat-input" appearance="outline">
+                <mat-form-field class="mat-input" appearance="outline" *ngIf="!editar">
                     <mat-label>Confirmar contraseña</mat-label>
                     <input matInput [(ngModel)]="user.confirmar_password" type="{{ inputType_2 }}" placeholder="Confirma la contraseña">
                     <mat-icon matSuffix class="eye-icon" (click)="showPwdConfirmar()">{{hide_2 ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -91,7 +91,8 @@
 
                 <div class="section-buttons">
                     <button class="btn btn-danger" (click)="regresar()">Cancelar</button>
-                    <button class="btn btn-primary" type="submit" (click)="registrar()">Registrar</button>
+                    <button *ngIf="!editar" class="btn btn-primary" type="submit" (click)="registrar()">Registrar</button>
+                    <button *ngIf="editar" class="btn btn-primary" type="submit" (click)="registrar()">Actualizar</button>
                 </div>
             </div>
         </div>

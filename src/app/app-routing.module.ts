@@ -7,6 +7,7 @@ import { HomePageScreenComponent } from './screens/home-page-screen/home-page-sc
 const routes: Routes = [
   { path: '', component: LoginScreenComponent, pathMatch: 'full' },
   { path: 'registro', component: RegistroUserScreenComponent, pathMatch: 'full' },
+  { path: 'registro/:id', component: RegistroUserScreenComponent, pathMatch: 'full' },
   { path: 'home', component: HomePageScreenComponent, pathMatch: 'full' },
 ];
 
