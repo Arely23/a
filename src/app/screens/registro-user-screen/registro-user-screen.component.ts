@@ -54,7 +54,7 @@ export class RegistroUserScreenComponent implements OnInit {
      //Validar
      this.errors = [];
 
-     this.errors = this.usuariosService.validarUsuario(this.user);
+     this.errors = this.usuariosService.validarUsuario(this.user, this.editar);
      if(!$.isEmptyObject(this.errors)){
        return false;
      }
@@ -71,6 +71,29 @@ export class RegistroUserScreenComponent implements OnInit {
       }
      );
   }
+  //Función para editar usuario
+  public actualizar(){
+    //Validar
+    this.errors = [];
+
+    this.errors = this.usuariosService.validarUsuario(this.user, this.editar);
+    if(!$.isEmptyObject(this.errors)){
+      return false;
+    }
+    console.log("Pasó la validación");
+    
+    // //Mandar a registrar los datos
+    // this.usuariosService.registrarUsuario(this.user).subscribe(
+    //  (response)=>{
+    //    alert("Usuario registrado correctamente");
+    //    console.log("Usuario registrado: ", response);
+    //    //Si se registró, entonces mandar al login
+    //    this.router.navigate(["/"]);
+    //  }, (error)=>{
+    //    alert("No se pudo registrar usuario");
+    //  }
+    // );
+ }
 
   //Función para obtener un solo usuario por su ID
   public obtenerUserByID(){
@@ -78,13 +101,10 @@ export class RegistroUserScreenComponent implements OnInit {
       (response)=>{
         this.user = response;
         //Agregamos valores faltantes
-        this.user.id = response.matricula;
         this.user.first_name = response.user.first_name;
         this.user.last_name = response.user.last_name;
         this.user.email = response.user.email;
-        var fechaNac = new Date(response.fecha_nacimiento);
-        console.log("Fecha: ", fechaNac);
-        this.user.fecha_nacimiento = fechaNac;
+        this.user.fecha_nacimiento = response.fecha_nacimiento.split("T")[0];
         console.log("Datos user: ", this.user);
       }, (error)=>{
         alert("No se pudieron obtener los datos del usuario para editar");

@@ -9,9 +9,9 @@
             <div class="body-registro">
                 <mat-form-field class="mat-input" appearance="outline">
                     <mat-label>ID/Matrícula</mat-label>
-                    <input matInput [(ngModel)]="user.id" name="id" placeholder="Escribe ID o matrícula">
+                    <input matInput [(ngModel)]="user.matricula" name="id" placeholder="Escribe ID o matrícula">
                 </mat-form-field>
-                <div *ngIf="errors.id" class="invalid-feedback">{{ errors.id }}</div>
+                <div *ngIf="errors.matricula" class="invalid-feedback">{{ errors.matricula }}</div>
 
                 <mat-form-field class="mat-input" appearance="outline">
                     <mat-label>Nombre</mat-label>
@@ -53,7 +53,7 @@
                 <!-- Cambio de input de fecha -->
                 <mat-form-field class="mat-input" appearance="outline">
                     <mat-label>Fecha de nacimiento</mat-label>
-                    <input matInput [matDatepicker]="picker" [(ngModel)]="user.fecha_nacimiento" (focus)="picker.open()" placeholder="Agregar fecha" (dateChange)="changeFecha($event)">
+                    <input matInput [matDatepicker]="picker" [(ngModel)]="user.fecha_nacimiento" (focus)="picker.open()" placeholder="Agregar fecha" (dateChange)="changeFecha($event)" type="string">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
@@ -92,7 +92,7 @@
                 <div class="section-buttons">
                     <button class="btn btn-danger" (click)="regresar()">Cancelar</button>
                     <button *ngIf="!editar" class="btn btn-primary" type="submit" (click)="registrar()">Registrar</button>
-                    <button *ngIf="editar" class="btn btn-primary" type="submit" (click)="registrar()">Actualizar</button>
+                    <button *ngIf="editar" class="btn btn-primary" type="submit" (click)="actualizar()">Actualizar</button>
                 </div>
             </div>
         </div>

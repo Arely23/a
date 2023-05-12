@@ -27,7 +27,7 @@ export class UsuariosService {
 
   getDefaultSchedule() {
     return {
-      'id': '',
+      'matricula': '',
       'first_name': '',
       'last_name': '',
       'email': '',
@@ -42,12 +42,12 @@ export class UsuariosService {
     }
   }
 
-  public validarUsuario(data: any){
+  public validarUsuario(data: any, editar: boolean){
     console.log("Validando user... ", data);
     let error: any = [];
 
-    if(!this.validatorService.required(data["id"])){
-      error["id"] = this.errorService.required;
+    if(!this.validatorService.required(data["matricula"])){
+      error["matricula"] = this.errorService.required;
     }
 
     if(!this.validatorService.required(data["first_name"])){
@@ -66,12 +66,15 @@ export class UsuariosService {
       error['email'] = this.errorService.email;
     }
 
-    if(!this.validatorService.required(data["password"])){
-      error["password"] = this.errorService.required;
-    }
-
-    if(!this.validatorService.required(data["confirmar_password"])){
-      error["confirmar_password"] = this.errorService.required;
+    //Checa la bandera de editar si es TRUE
+    if(!editar){
+      if(!this.validatorService.required(data["password"])){
+        error["password"] = this.errorService.required;
+      }
+  
+      if(!this.validatorService.required(data["confirmar_password"])){
+        error["confirmar_password"] = this.errorService.required;
+      }
     }
 
     if(!this.validatorService.required(data["fecha_nacimiento"])){
