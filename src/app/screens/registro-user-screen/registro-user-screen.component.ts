@@ -83,16 +83,16 @@ export class RegistroUserScreenComponent implements OnInit {
     console.log("Pasó la validación");
     
     // //Mandar a registrar los datos
-    // this.usuariosService.registrarUsuario(this.user).subscribe(
-    //  (response)=>{
-    //    alert("Usuario registrado correctamente");
-    //    console.log("Usuario registrado: ", response);
-    //    //Si se registró, entonces mandar al login
-    //    this.router.navigate(["/"]);
-    //  }, (error)=>{
-    //    alert("No se pudo registrar usuario");
-    //  }
-    // );
+    this.usuariosService.editarUsuario(this.user).subscribe(
+     (response)=>{
+       alert("Usuario editado correctamente");
+       console.log("Usuario editado: ", response);
+       //Si se editó, entonces mandar al home
+       this.router.navigate(["home"]);
+     }, (error)=>{
+       alert("No se pudo editar usuario");
+     }
+    );
  }
 
   //Función para obtener un solo usuario por su ID

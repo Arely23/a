@@ -2,9 +2,10 @@
     <div class="wrapper">
         <div class="section-home">
             <div class="header-home">
-                <mat-icon class="icon-back" (click)="logout()">arrow_back</mat-icon>
+                <button class="logout-hide" mat-flat-button>Cerrar sesión</button>
+                <!-- <mat-icon class="icon-back" (click)="logout()">arrow_back</mat-icon> -->
                 <span class="title">Lista de usuarios</span>
-                <mat-icon class="icon-forward">arrow_forward</mat-icon>
+                <button class="logout" mat-flat-button color="warn" (click)="logout()">Cerrar sesión</button>
             </div>
             <div class="body-home">
                 <div class="mat-elevation-z8">
@@ -68,7 +69,7 @@
                         <ng-container matColumnDef="eliminar">
                             <th mat-header-cell *matHeaderCellDef> Eliminar </th>
                             <td mat-cell *matCellDef="let element" class="td-eliminar"> 
-                                <i class="bi bi-trash3-fill"></i>
+                                <i class="bi bi-trash3-fill" (click)="delete(element.id)"></i>
                             </td>
                         </ng-container>
                     

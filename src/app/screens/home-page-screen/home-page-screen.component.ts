@@ -5,6 +5,8 @@ import { Location } from '@angular/common';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { MatDialog } from '@angular/material/dialog';
+import { EliminarUserModalComponent } from 'src/app/modals/eliminar-user-modal/eliminar-user-modal.component';
 
 @Component({
   selector: 'app-home-page-screen',
@@ -30,6 +32,7 @@ export class HomePageScreenComponent implements OnInit {
     private facadeService: FacadeService,
     private location: Location,
     private usuariosService: UsuariosService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -112,6 +115,24 @@ export class HomePageScreenComponent implements OnInit {
     this.router.navigate(["registro/"+id]);
   }
   
+  public delete(idUser: number){
+    const dialogRef = this.dialog.open(EliminarUserModalComponent,{
+      data: {id: idUser},
+      height: '268px',
+      width: '328px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result.isDelete){
+        console.log("Usuario eliminado");
+        window.location.reload();
+      }else{
+        console.log("No se eliminó el usuario");
+        
+      }
+      
+    });
+  }
 }//Aquí cierra la clase principal
 
 //Esto va fuera de la llave que cierra la clase

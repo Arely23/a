@@ -18,6 +18,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
 //Esto es para fechas
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -26,14 +27,16 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 //Componentes
 import { LoginScreenComponent } from './screens/login-screen/login-screen.component';
 import { RegistroUserScreenComponent } from './screens/registro-user-screen/registro-user-screen.component';
-import { HomePageScreenComponent } from './screens/home-page-screen/home-page-screen.component'
+import { HomePageScreenComponent } from './screens/home-page-screen/home-page-screen.component';
+import { EliminarUserModalComponent } from './modals/eliminar-user-modal/eliminar-user-modal.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginScreenComponent,
     RegistroUserScreenComponent,
-    HomePageScreenComponent
+    HomePageScreenComponent,
+    EliminarUserModalComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,8 @@ import { HomePageScreenComponent } from './screens/home-page-screen/home-page-sc
     MatNativeDateModule,
     HttpClientModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-ES'},
