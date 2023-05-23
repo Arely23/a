@@ -17,7 +17,6 @@ export class EliminarUserModalComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("User id:", this.data.id);
-    
   }
 
   public cerrar_modal(){
@@ -34,6 +33,6 @@ export class EliminarUserModalComponent implements OnInit {
         this.dialogRef.close({isDelete:false});
       }
     );
-  } 
+  }
 
 }

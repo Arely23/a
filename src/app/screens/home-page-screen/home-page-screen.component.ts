@@ -128,9 +128,8 @@ export class HomePageScreenComponent implements OnInit {
         window.location.reload();
       }else{
         console.log("No se eliminó el usuario");
-        
+        //alert("No se eliminó el usuario");
       }
-      
     });
   }
 }//Aquí cierra la clase principal
